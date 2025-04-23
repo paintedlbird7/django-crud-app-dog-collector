@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+# Import the User
+from django.contrib.auth.models import User
 
 # A tuple of 2-tuples added above our models
 MEALS = (
@@ -13,6 +15,8 @@ class Dog(models.Model):
     breed = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+       # Add the foreign key linking to a user instance
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

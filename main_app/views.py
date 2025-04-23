@@ -5,11 +5,23 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Import the FeedingForm
 from .forms import FeedingForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
+
 
 
 # Define the home view function
+class Home(LoginView):
+    template_name = 'home.html'
+
+# def home(request):
+#     return render(request, 'home.html')
+
+
 def home(request):
-    return render(request, 'home.html')
+    form = AuthenticationForm()
+    return render(request, 'home.html', {'form': form})
+
 
 def about(request):
     # return HttpResponse('<h1>About the DogCollector</h1>')
