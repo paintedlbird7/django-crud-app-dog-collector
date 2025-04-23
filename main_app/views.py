@@ -33,3 +33,5 @@ dogs = [
 def dog_index(request):
     # Render the dogs/index.html template with the dogs data
     return render(request, 'dogs/index.html', {'dogs': dogs})
+
+#TODO: 🎓Left off at You Do: Create a template for the home page
