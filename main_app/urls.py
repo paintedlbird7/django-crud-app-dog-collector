@@ -10,4 +10,6 @@ urlpatterns = [
     path('dogs/<int:dog_id>/', views.dog_detail, name='dog-detail'),
     # new route used to create a dog
     path('dogs/create/', views.DogCreate.as_view(), name='dog-create'),
+    path('dogs/<int:pk>/update/', views.DogUpdate.as_view(), name='dog-update'),
+    path('dogs/<int:pk>/delete/', views.DogDelete.as_view(), name='dog-delete'),
 ]

@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from .models import Dog
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 
@@ -27,10 +28,24 @@ class DogCreate(CreateView):
     model = Dog
     # fields = '__all__'
     fields = ['name', 'breed', 'description', 'age']
+    # success_url = '/dogs/'
+
+class DogUpdate(UpdateView):
+    model = Dog
+    # Let's disallow the renaming of a dog by excluding the name field!
+    fields = ['breed', 'description', 'age']
+
+class DogDelete(DeleteView):
+    model = Dog
     success_url = '/dogs/'
 
 
-#TODO: Create the template for creating cats
+#TODO: left at Updating & deleting dogs with class-based views
+#TODO: Create a one-to-many relationship with a second model.
+#TODO: Implement full CRUD operations for the secondary model, ensuring resources can be created, read, updated, and deleted.
+#TODO: Create a one-to-many data relationship in Django : Dogs -< Feedings
+
+
 
 
 

@@ -6,9 +6,13 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>Add a Dog</h1>
-  <img src="{% static 'images/nerd-dog.png' %}" alt="A dog using a computer" />
-</div>
+    <!-- Using the generic 'object' variable -->
+    {% if object %}
+      <h1>Edit {{ object.name }}</h1>
+    {% else %}
+      <h1>Add a Cat</h1>
+    {% endif %}
+  </div>
 
 <form action="" method="post" class="form-container">
   {% csrf_token %}
