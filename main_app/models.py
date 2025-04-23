@@ -1,6 +1,13 @@
 from django.db import models
 from django.urls import reverse
 
+# A tuple of 2-tuples added above our models
+MEALS = (
+    ('B', 'Breakfast'),
+    ('L', 'Lunch'),
+    ('D', 'Dinner')
+)
+
 class Dog(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
@@ -14,3 +21,22 @@ class Dog(models.Model):
     def get_absolute_url(self):
         # Use the 'reverse' function to dynamically find the URL for viewing this dog's details
         return reverse('dog-detail', kwargs={'dog_id': self.id})
+    
+    # Add new Feeding model below Dog model
+
+class Feeding(models.Model):
+    date = models.DateField('Feeding date')
+    meal = models.CharField(
+        max_length=1,
+        # add the 'choices' field option
+        choices=MEALS,
+        # set the default value for meal to be 'B'
+        default=MEALS[0][0]
+    )
+      # Create a dog_id column for each feeding in the database
+    dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
+
+    def __str__(self):
+        # Nice method for obtaining the friendly value of a Field.choice
+        return f"{self.get_meal_display()} on {self.date}"
+

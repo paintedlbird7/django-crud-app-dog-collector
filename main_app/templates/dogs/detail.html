@@ -22,5 +22,41 @@
         <a href="{% url 'dog-delete' dog.id %}" class="btn danger">Delete</a>
       </div>
   </div>
+
+  <!-- Existing dog-container above -->
+  <div class="feedings-toy-container">
+    <section class="feedings">
+      <div class="subsection-title">
+        <h2>Feedings</h2>
+          src="{% static 'images/dog-cone.svg' %}"
+          alt="An ice cream cone dog"
+        />
+        <img src="{% static 'images/dog-onigiri.svg' %}" alt="A dog as onigiri" />
+        <img
+          src="{% static 'images/kitty-kabob.svg' %}"
+          alt="A kabob of puppies"
+        />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Meal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for feeding in dog.feeding_set.all %}
+            <tr>
+              <td>{{feeding.date}}</td>
+              <td>{{feeding.get_meal_display}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+  
+  {% comment %} {% endblock %} {% endcomment %}
+  
 </section>
 {% endblock %}
