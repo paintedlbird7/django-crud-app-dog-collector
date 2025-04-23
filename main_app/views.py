@@ -46,7 +46,7 @@ class DogDelete(DeleteView):
     success_url = '/dogs/'
 
 
-#TODO: left at Adding new feedings from the Detail page
+#TODO: left at Use Django’s DateInput
 #TODO: Create a one-to-many relationship with a second model.
 #TODO: Implement full CRUD operations for the secondary model, ensuring resources can be created, read, updated, and deleted.
 #TODO: Create a one-to-many data relationship in Django : Dogs -< Feedings
