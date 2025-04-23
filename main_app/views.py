@@ -1,13 +1,9 @@
 # main_app/views.py
 from django.shortcuts import render
 
-# Import HttpResponse to send text-based responses
-from django.http import HttpResponse
-
 # Define the home view function
 def home(request):
-    # Send a simple HTML response
-    return HttpResponse('<h1>Hello ᓚᘏᗢ</h1>')
+    return render(request, 'home.html')
 
 def about(request):
     # return HttpResponse('<h1>About the DogCollector</h1>')
@@ -27,8 +23,6 @@ dogs = [
     Dog('Fancy', 'bombay', 'Happy fluff ball.', 4),
     Dog('Bonk', 'selkirk rex', 'Meows loudly.', 6)
 ]
-
-# views.py
 
 def dog_index(request):
     # Render the dogs/index.html template with the dogs data
