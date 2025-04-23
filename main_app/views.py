@@ -18,7 +18,7 @@ def about(request):
 #         self.description = description
 #         self.age = age
 
-# # Create a list of Cat instances
+# # Create a list of Dog instances
 # dogs = [
 #     Dog('Lolo', 'tabby', 'Kinda rude.', 3),
 #     Dog('Sachi', 'tortoiseshell', 'Looks like a turtle.', 0),
@@ -31,4 +31,6 @@ def dog_index(request):
     dogs = Dog.objects.all()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
-#TODO: 🎓Left off at You Do: Create a template for the home page
+def dog_detail(request, dog_id):
+    dog = Dog.objects.get(id=dog_id)
+    return render(request, 'dogs/detail.html', {'dog': dog})
