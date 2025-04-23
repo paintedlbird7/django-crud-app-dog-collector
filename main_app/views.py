@@ -3,7 +3,8 @@ from django.shortcuts import render
 from .models import Dog
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+# Import the FeedingForm
+from .forms import FeedingForm
 
 
 # Define the home view function
@@ -22,7 +23,12 @@ def dog_index(request):
 
 def dog_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
-    return render(request, 'dogs/detail.html', {'dog': dog})
+    # instantiate FeedingForm to be rendered in the template
+    feeding_form = FeedingForm()
+    return render(request, 'dogs/detail.html', {
+        # include the dog and feeding_form in the context
+        'dog': dog, 'feeding_form': feeding_form
+    })
 
 class DogCreate(CreateView):
     model = Dog
@@ -40,7 +46,7 @@ class DogDelete(DeleteView):
     success_url = '/dogs/'
 
 
-#TODO: left at Updating & deleting dogs with class-based views
+#TODO: left at Adding new feedings from the Detail page
 #TODO: Create a one-to-many relationship with a second model.
 #TODO: Implement full CRUD operations for the secondary model, ensuring resources can be created, read, updated, and deleted.
 #TODO: Create a one-to-many data relationship in Django : Dogs -< Feedings
