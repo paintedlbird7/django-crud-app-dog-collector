@@ -7,6 +7,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import FeedingForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
+# Other imports above
+from django.views.generic import ListView, DetailView
+# Add the two imports below
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+# Other code below
 
 
 
@@ -70,8 +76,35 @@ def add_feeding(request, dog_id):
     return redirect('dog-detail', dog_id=dog_id)
 
 
-#TODO: left at Logging out
-#TODO: Create a one-to-many relationship with a second model.
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        # This is how to create a 'user' form object
+        # that includes the data from the browser
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # This will add the user to the database
+            user = form.save()
+            # This is how we log a user in
+            login(request, user)
+            return redirect('dog-index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    # A bad POST or a GET request, so render signup.html with an empty form
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'signup.html', context)
+    # Same as: 
+    # return render(
+    #     request, 
+    #     'signup.html',
+    #     {'form': form, 'error_message': error_message}
+    # )
+
+
+
+#TODO: left at Displaying only the user’s cats
+#TODO: Create a Update the DogCreate view to assign a new dog to the logged in user
 #TODO: Implement full CRUD operations for the secondary model, ensuring resources can be created, read, updated, and deleted.
 #TODO: Create a one-to-many data relationship in Django : Dogs -< Feedings
 

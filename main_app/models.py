@@ -25,6 +25,13 @@ class Dog(models.Model):
     def get_absolute_url(self):
         # Use the 'reverse' function to dynamically find the URL for viewing this dog's details
         return reverse('dog-detail', kwargs={'dog_id': self.id})
+    # This inherited method is called when a
+    # valid dog form is being submitted
+    def form_valid(self, form):
+        # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the dog
+        # Let the CreateView do its job as usual
+        return super().form_valid(form)
     
     # Add new Feeding model below Dog model
 class Feeding(models.Model):

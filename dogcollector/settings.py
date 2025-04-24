@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'lm709liau8g943__!mv!h0c@f5x^*q08r+4g3zfqfb@035by=n'
+SECRET_KEY = ''
 # https://djecrety.ir/ to change the secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -121,6 +121,9 @@ STATIC_URL = 'static/'
 
 # Add this variable to specify where successful logins should redirect to
 LOGIN_REDIRECT_URL = 'dog-index'
+
+# Add this variable to specify where logging out redirects to
+LOGOUT_REDIRECT_URL = 'home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
