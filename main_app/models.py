@@ -27,7 +27,6 @@ class Dog(models.Model):
         return reverse('dog-detail', kwargs={'dog_id': self.id})
     
     # Add new Feeding model below Dog model
-
 class Feeding(models.Model):
     date = models.DateField('Feeding date')
     meal = models.CharField(
