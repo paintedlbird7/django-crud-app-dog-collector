@@ -70,7 +70,7 @@ def add_feeding(request, dog_id):
     return redirect('dog-detail', dog_id=dog_id)
 
 
-#TODO: left at Adjust the order of feedings
+#TODO: left at Updating the nav bar dynamically
 #TODO: Create a one-to-many relationship with a second model.
 #TODO: Implement full CRUD operations for the secondary model, ensuring resources can be created, read, updated, and deleted.
 #TODO: Create a one-to-many data relationship in Django : Dogs -< Feedings

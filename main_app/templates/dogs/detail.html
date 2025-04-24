@@ -46,7 +46,7 @@
       </form>      
 
       <h3>Past Feedings</h3>
-{% if cat.feeding_set.all.count %}
+{% if dog..feeding_set.all.count %}
   <table>
     <thead>
       <tr>
@@ -55,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for feeding in cat.feeding_set.all %}
+      {% for feeding in dog.feeding_set.all %}
       <tr>
         <td>{{feeding.date}}</td>
         <td>{{feeding.get_meal_display}}</td>
@@ -65,7 +65,7 @@
   </table>
 {% else %}
   <div class="subsection-content">
-    <p>⚠️ {{cat.name}} has not been fed!</p>
+    <p>⚠️ {{dog..name}} has not been fed!</p>
   </div>
 {% endif %}
 
