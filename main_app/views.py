@@ -12,8 +12,10 @@ from django.views.generic import ListView, DetailView
 # Add the two imports below
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-# Other code below
-
+# Import the login_required decorator
+from django.contrib.auth.decorators import login_required
+# Import the mixin for class-based views
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Define the home view function
@@ -33,12 +35,16 @@ def about(request):
     # return HttpResponse('<h1>About the DogCollector</h1>')
     return render(request, 'about.html')
 
-
+@login_required
 def dog_index(request):
     # Render the dogs/index.html template with the dogs data
-    dogs = Dog.objects.all()
+    # dogs = Dog.objects.all()
+    dogs = Dog.objects.filter(user=request.user)
+    # You could also retrieve the logged in user's dogs like this
+    # dogs = request.user.dog_set.all()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
+@login_required
 def dog_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
     # instantiate FeedingForm to be rendered in the template
@@ -48,21 +54,25 @@ def dog_detail(request, dog_id):
         'dog': dog, 'feeding_form': feeding_form
     })
 
+LoginRequiredMixin,
 class DogCreate(CreateView):
     model = Dog
     # fields = '__all__'
     fields = ['name', 'breed', 'description', 'age']
     # success_url = '/dogs/'
 
+LoginRequiredMixin,
 class DogUpdate(UpdateView):
     model = Dog
     # Let's disallow the renaming of a dog by excluding the name field!
     fields = ['breed', 'description', 'age']
 
+LoginRequiredMixin,
 class DogDelete(DeleteView):
     model = Dog
     success_url = '/dogs/'
 
+@login_required
 def add_feeding(request, dog_id):
     # create a ModelForm instance using the data in request.POST
     form = FeedingForm(request.POST)
@@ -103,7 +113,7 @@ def signup(request):
 
 
 
-#TODO: left at Displaying only the user’s cats
+#TODO: left at Integrating MCDatepicker for a custom date picker
 #TODO: Create a Update the DogCreate view to assign a new dog to the logged in user
 #TODO: Implement full CRUD operations for the secondary model, ensuring resources can be created, read, updated, and deleted.
 #TODO: Create a one-to-many data relationship in Django : Dogs -< Feedings

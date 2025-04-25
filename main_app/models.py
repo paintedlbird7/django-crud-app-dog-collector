@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 # Import the User
 from django.contrib.auth.models import User
+from datetime import date
 
 # A tuple of 2-tuples added above our models
 MEALS = (
@@ -33,6 +34,9 @@ class Dog(models.Model):
         # Let the CreateView do its job as usual
         return super().form_valid(form)
     
+    def fed_for_today(self):
+        return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
+    
     # Add new Feeding model below Dog model
 class Feeding(models.Model):
     date = models.DateField('Feeding date')
@@ -52,4 +56,4 @@ class Feeding(models.Model):
       # Define the default order of feedings
     class Meta:
         ordering = ['-date']  # This line makes the newest feedings appear first
-
+  
